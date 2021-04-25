@@ -1,0 +1,28 @@
+{
+  "name": "pigeonmark-utils",
+  "version": "1.0.0",
+  "description": "Utilities for working with PigeonMark data structures",
+  "main": "library/index.js",
+  "scripts": {
+    "test": "mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bluebie/pigeonmark.git"
+  },
+  "keywords": [
+    "PigeonMark",
+    "xml",
+    "html"
+  ],
+  "author": "Phoenix Fox",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/Bluebie/pigeonmark/issues"
+  },
+  "homepage": "https://github.com/Bluebie/pigeonmark#readme",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2"
+  }
+}

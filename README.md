@@ -11,6 +11,7 @@ Implementations are available here for NodeJS-like platforms.
 PigeonMark implements JsonML encoding at it's core:
 
  - `<tag>text</tag>` becomes `['tag', 'text']`
+ - `<tag attr="val"/>` becomes `['tag', { attr: 'val' }]`
  - `<tag attr="val"></tag>` becomes `['tag', { attr: 'val' }]`
  - `<tag id="foo">text</tag>` becomes `['tag', { id: 'foo' }, 'text']`
  - `plain text` becomes `'plain text'`

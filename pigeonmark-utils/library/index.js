@@ -74,7 +74,7 @@ exports.get = {
    * @returns {string|undefined}
    */
   name (node) {
-    const type = exports.type(node)
+    const type = exports.get.type(node)
     if (type === 'tag') {
       return node[0]
     } else if (type === 'pi') {

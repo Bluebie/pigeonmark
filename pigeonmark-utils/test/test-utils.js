@@ -3,28 +3,6 @@ const { expect } = require('chai')
 const pmu = require('../library/index.js')
 
 describe('pigeonmark-utils', () => {
-  it('pigeonmark-utils.get.id(node)', () => {
-    expect(pmu.get.id(['tag', { id: 'val' }])).to.equal('val')
-    expect(pmu.get.id(['tag', { id: 'val' }, 'string'])).to.equal('val')
-    expect(pmu.get.id(['tag', { id: 'val' }, 'string', ['tag']])).to.equal('val')
-    expect(pmu.get.id(['tag', { diff: 'val' }, 'string', ['tag']])).to.equal(undefined)
-    expect(pmu.get.id(['tag', 'string'])).to.equal(undefined)
-    expect(pmu.get.id(['tag', 'string', ['tag']])).to.equal(undefined)
-    expect(pmu.get.id(['#cdata-section', 'foo'])).to.equal(undefined)
-    expect(pmu.get.id(['#document', ['tag']])).to.deep.equal(undefined)
-  })
-
-  it('pigeonmark-utils.get.className(node)', () => {
-    expect(pmu.get.classList(['tag', { class: 'val' }])).to.deep.equal(['val'])
-    expect(pmu.get.classList(['tag', { class: 'val' }, 'string'])).to.deep.equal(['val'])
-    expect(pmu.get.classList(['tag', { class: 'val' }, 'string', ['tag']])).to.deep.equal(['val'])
-    expect(pmu.get.classList(['tag', { diff: 'val' }, 'string', ['tag']])).to.deep.equal([])
-    expect(pmu.get.classList(['tag', 'string'])).to.deep.equal([])
-    expect(pmu.get.classList(['tag', 'string', ['tag']])).to.deep.equal([])
-    expect(pmu.get.classList(['#cdata-section', 'foo'])).to.deep.equal([])
-    expect(pmu.get.classList(['#document', ['tag']])).to.deep.equal([])
-  })
-
   it('pigeonmark-utils.get.type(node)', () => {
     expect(pmu.get.type(false)).to.equal(undefined)
     expect(pmu.get.type(123)).to.equal(undefined)
@@ -48,6 +26,17 @@ describe('pigeonmark-utils', () => {
     expect(pmu.get.type(['?xml-stylesheet', { href: 'foo.css' }])).to.equal('pi')
     expect(pmu.get.type(['?xml-random-nonsense', { }])).to.equal('pi')
     expect(pmu.get.type(['?xml-random-nonsense'])).to.equal('pi')
+  })
+
+  it('pigeonmark-utils.get.name(node)', () => {
+    expect(pmu.get.name(['tag', { id: 'val' }])).to.equal('tag')
+    expect(pmu.get.name(['tag', { id: 'val' }, 'string'])).to.equal('tag')
+    expect(pmu.get.name(['tag', { id: 'val' }, 'string', ['subtag']])).to.equal('tag')
+    expect(pmu.get.name(['tag', { diff: 'val' }, 'string', ['subtag']])).to.equal('tag')
+    expect(pmu.get.name(['tag', 'string'])).to.equal('tag')
+    expect(pmu.get.name(['tag', 'string', ['subtag']])).to.equal('tag')
+    expect(pmu.get.name(['#cdata-section', 'foo'])).to.equal(undefined)
+    expect(pmu.get.name(['#document', ['tag']])).to.deep.equal(undefined)
   })
 
   it('pigeonmark-utils.get.attribute(node, name)', () => {
@@ -74,6 +63,28 @@ describe('pigeonmark-utils', () => {
     expect(pmu.get.childNodes(['#cdata-section', 'foo'])).to.deep.equal(undefined)
     expect(pmu.get.childNodes(['#document', ['tag']])).to.deep.equal([['tag']])
     expect(pmu.get.childNodes(['#document-fragment', ['tag'], 'string', ['#cdata-section', 'foo'], ['tag2']])).to.deep.equal([['tag'], 'string', ['#cdata-section', 'foo'], ['tag2']])
+  })
+
+  it('pigeonmark-utils.get.id(node)', () => {
+    expect(pmu.get.id(['tag', { id: 'val' }])).to.equal('val')
+    expect(pmu.get.id(['tag', { id: 'val' }, 'string'])).to.equal('val')
+    expect(pmu.get.id(['tag', { id: 'val' }, 'string', ['tag']])).to.equal('val')
+    expect(pmu.get.id(['tag', { diff: 'val' }, 'string', ['tag']])).to.equal(undefined)
+    expect(pmu.get.id(['tag', 'string'])).to.equal(undefined)
+    expect(pmu.get.id(['tag', 'string', ['tag']])).to.equal(undefined)
+    expect(pmu.get.id(['#cdata-section', 'foo'])).to.equal(undefined)
+    expect(pmu.get.id(['#document', ['tag']])).to.deep.equal(undefined)
+  })
+
+  it('pigeonmark-utils.get.classList(node)', () => {
+    expect(pmu.get.classList(['tag', { class: 'val' }])).to.deep.equal(['val'])
+    expect(pmu.get.classList(['tag', { class: 'val' }, 'string'])).to.deep.equal(['val'])
+    expect(pmu.get.classList(['tag', { class: 'val' }, 'string', ['tag']])).to.deep.equal(['val'])
+    expect(pmu.get.classList(['tag', { diff: 'val' }, 'string', ['tag']])).to.deep.equal([])
+    expect(pmu.get.classList(['tag', 'string'])).to.deep.equal([])
+    expect(pmu.get.classList(['tag', 'string', ['tag']])).to.deep.equal([])
+    expect(pmu.get.classList(['#cdata-section', 'foo'])).to.deep.equal([])
+    expect(pmu.get.classList(['#document', ['tag']])).to.deep.equal([])
   })
 
   it('pigeonmark-utils.get.text(node)', () => {

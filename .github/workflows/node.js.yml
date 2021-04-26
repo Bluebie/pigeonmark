@@ -25,11 +25,15 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: cd pigeonmark-html
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
-    - run: cd ../pigeonmark-utils
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - working-directory: ./pigeonmark-html
+      run: npm ci
+    - working-directory: ./pigeonmark-html
+      run: npm run build --if-present
+    - working-directory: ./pigeonmark-html
+      run: npm test
+    - working-directory: ./pigeonmark-utils
+      run: npm ci
+    - working-directory: ./pigeonmark-utils
+      run: npm run build --if-present
+    - working-directory: ./pigeonmark-utils
+      run: npm test

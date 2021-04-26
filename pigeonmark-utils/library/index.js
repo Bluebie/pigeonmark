@@ -43,8 +43,8 @@ exports.get = {
   /**
    * given a node, returns type string, one of 'tag', 'cdata', 'comment', 'doctype', 'pi', 'text', 'document' or 'fragment'
    * or returns undefined if the node doesn't seem to be interperable as PigeonMark
-   * @param {PMRootNode|PMChildNode|*} node
-   * @returns {'tag'|'cdata'|'comment'|'doctype'|'pi'|'text'|'document'|'fragment'|undefined}
+   * @param {PMNode} node
+   * @returns {'tag'|'cdata'|'comment'|'pi'|'text'|'document'|'fragment'|undefined}
    */
   type (node) {
     if (Array.isArray(node)) {
@@ -54,7 +54,6 @@ exports.get = {
           // handle special node types
           if (name.startsWith('#')) return typeLabels[name] // it's a dom type
           if (name.startsWith('?')) return 'pi' // it's one of those <?xml...?> sort of PIs
-          if (name === '!DOCTYPE') return 'doctype'
 
           if (node.every((v, i) => Array.isArray(v) || typeof v === 'string' || (i === 1 && isAttrs(v)))) {
             return 'tag'
@@ -89,9 +88,19 @@ exports.get = {
    * @returns {string|undefined}
    */
   attribute (node, attributeName) {
+    return exports.get.attributes(node)[attributeName]
+  },
+
+  /**
+   * get all the attributes of a tag or xmlpi, or an empty object if it doesn't have any
+   * @param {PMTag|PMXMLPI} node - tag node
+   * @returns {object}
+   */
+  attributes (node) {
     if (Array.isArray(node) && typeof node[0] === 'string' && typeof node[1] === 'object' && !Array.isArray(node[1])) {
-      return node[1][attributeName]
+      return node[1]
     }
+    return {}
   },
 
   /**
@@ -107,8 +116,8 @@ exports.get = {
 
   /**
    * returns all child nodes of a tag, document, or fragment, or undefined if the input isn't a tag
-   * @param {Array} node
-   * @returns {Array[]}
+   * @param {PMTag|PMDocument|PMFragment} node
+   * @returns {PMChildNode[]}
    */
   childNodes (node) {
     if (['tag', 'document', 'fragment'].includes(exports.get.type(node))) {
@@ -128,7 +137,7 @@ exports.get = {
 
   /**
    * shortcut to read class attribute, always returns a string, empty if no id is set
-   * @param {Array} node
+   * @param {PMTag} node
    * @returns {string}
    */
   classList (node) {
@@ -142,7 +151,7 @@ exports.get = {
 
   /**
    * like WebAPI Element.textContent, returns a concatinated string of all the text and cdata nodes within this node
-   * @param {Array} node
+   * @param {PMNode} node
    * @returns {string}
    */
   text (node) {
@@ -172,5 +181,123 @@ exports.get = {
       }
       return [...iter(node)].join('')
     }
+  }
+}
+
+exports.set = {
+  /**
+   * sets the name of a tag or xmlpi
+   * @param {PMTag|PMXMLPI} node
+   * @returns {PMTag|PMXMLPI} - returns the same node for chaining
+   */
+  name (node, name) {
+    const type = exports.get.type(node)
+    if (type === 'tag') {
+      node[0] = name
+    } else if (type === 'pi') {
+      node[0] = `?${name}`
+    }
+    return node
+  },
+
+  /**
+   * sets attribute value from tag node, or undefined if the attribute isn't set or the tag doesn't have attributes
+   * @param {PMTag|PMXMLPI} node - tag node
+   * @param {string} attributeName - string attribute name
+   * @param {string} attributeValue - string value to set attribute to
+   * @returns {string|undefined}
+   */
+  attribute (node, attributeName, attributeValue) {
+    if (Array.isArray(node) && typeof node[0] === 'string') {
+      if (typeof node[1] === 'object' && !Array.isArray(node[1])) {
+        node[1][attributeName] = attributeValue
+      } else {
+        const name = node.shift()
+        const attrs = { [attributeName]: attributeValue }
+        node.unshift(name, attrs)
+      }
+    }
+    return node
+  },
+
+  /**
+   * sets all the attributes of a tag or xmlpi, or an empty object if it doesn't have any
+   * @param {PMTag|PMXMLPI} node - tag node
+   * @param {object} attributes - object of key-value pairs for attributes
+   * @returns {PMTag|PMXMLPI} - returns input node for chaining
+   */
+  attributes (node, object) {
+    if (Array.isArray(node) && typeof node[0] === 'string') {
+      if (typeof node[1] === 'object' && !Array.isArray(node[1])) {
+        node[1] = object
+      } else {
+        const name = node.shift()
+        node.unshift(name, object)
+      }
+    }
+    return node
+  },
+
+  /**
+   * replaces child nodes of tag with specified children
+   * @param {PMRootNode} node
+   * @param {PMChildNode[]} children
+   * @returns {PMRootNode} - same node, for chaining
+   */
+  children (node, children) {
+    return exports.set.childNodes(node, children)
+  },
+
+  /**
+   * replaces child nodes of tag with specified children
+   * @param {PMRootNode} node
+   * @param {PMChildNode[]} children
+   * @returns {PMRootNode} - same node, for chaining
+   */
+  childNodes (node, children) {
+    const type = exports.get.type(node)
+    if (!['tag', 'document', 'fragment'].includes(type)) throw new Error('can only set children on tag, document, and fragment nodes')
+
+    if (node[1] && typeof node[1] === 'object' && !Array.isArray(node[1])) {
+      // has attrs
+      node.length = 2
+      node.push(...children)
+    } else {
+      node.length = 1
+      node.push(...children)
+    }
+
+    return node
+  },
+
+  /**
+   * shortcut to set id attribute of a tag
+   * @param {PMTag} node
+   * @param {string} value
+   * @returns {string|undefined}
+   */
+  id (node, value) {
+    return exports.set.attribute(node, 'id', `${value}`)
+  },
+
+  /**
+   * shortcut to read class attribute, always returns a string, empty if no id is set
+   * @param {PMTag} node
+   * @param {string[]|string} classList - string or array of strings to form class list
+   * @returns {string}
+   */
+  classList (node, classList) {
+    if (Array.isArray(classList)) classList = classList.join(' ')
+    return exports.set.attribute(node, 'class', `${classList}`)
+  },
+
+  /**
+   * like WebAPI Element.textContent, replaces children of tag with a text node when set
+   * @param {PMNode} node
+   * @param {string} text
+   * @returns {string}
+   */
+  text (node, text) {
+    return exports.set.children(node, [`${text}`])
   }
 }

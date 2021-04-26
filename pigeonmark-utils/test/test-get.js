@@ -2,7 +2,7 @@
 const { expect } = require('chai')
 const pmu = require('../library/index.js')
 
-describe('pigeonmark-utils', () => {
+describe('pigeonmark-utils.get', () => {
   it('pigeonmark-utils.get.type(node)', () => {
     expect(pmu.get.type(false)).to.equal(undefined)
     expect(pmu.get.type(123)).to.equal(undefined)
@@ -21,7 +21,6 @@ describe('pigeonmark-utils', () => {
     expect(pmu.get.type(['tag cant have spaces', { attr: 'val' }])).to.equal(undefined)
     expect(pmu.get.type(['tag cant have spaces'])).to.equal(undefined)
     expect(pmu.get.type(['tag cant have spaces', 'string'])).to.equal(undefined)
-    expect(pmu.get.type(['!DOCTYPE', 'html'])).to.equal('doctype')
     expect(pmu.get.type(['?xml', { version: '1.0' }])).to.equal('pi')
     expect(pmu.get.type(['?xml-stylesheet', { href: 'foo.css' }])).to.equal('pi')
     expect(pmu.get.type(['?xml-random-nonsense', { }])).to.equal('pi')
@@ -42,7 +41,15 @@ describe('pigeonmark-utils', () => {
   it('pigeonmark-utils.get.attribute(node, name)', () => {
     expect(pmu.get.attribute(['tag'], 'attr')).to.equal(undefined)
     expect(pmu.get.attribute(['tag', { attr: 'val' }], 'attr')).to.equal('val')
-    expect(pmu.get.attribute(['tag', { attr: 'val' }], 'attr')).to.equal('val')
+  })
+
+  it('pigeonmark-utils.get.attributes(node)', () => {
+    expect(pmu.get.attributes(['tag'])).to.deep.equal({})
+    expect(pmu.get.attributes(['tag', { attr: 'val' }])).to.deep.equal({ attr: 'val' })
+    expect(pmu.get.attributes([1, 2, 3])).to.deep.equal({ })
+    expect(pmu.get.attributes(false)).to.deep.equal({ })
+    expect(pmu.get.attributes(null)).to.deep.equal({ })
+    expect(pmu.get.attributes('string')).to.deep.equal({ })
   })
 
   it('pigeonmark-utils.get.children(node)', () => {

@@ -57,6 +57,8 @@ describe('pigeonmark-utils.get', () => {
     expect(pmu.get.children(['tag', {}])).to.deep.equal([])
     expect(pmu.get.children(['tag', 'string'])).to.deep.equal([])
     expect(pmu.get.children(['tag', {}, 'string'])).to.deep.equal([])
+    expect(pmu.get.children(['tag', ['subtag', { attr: 'val' }], ' ooo ', ['yeah', 'no']])).to.deep.equal([['subtag', { attr: 'val' }], ['yeah', 'no']])
+    expect(pmu.get.children(['tag', {}, ['subtag', { attr: 'val' }], ' ooo ', ['yeah', 'no']])).to.deep.equal([['subtag', { attr: 'val' }], ['yeah', 'no']])
     expect(pmu.get.children(['#cdata-section', 'foo'])).to.deep.equal(undefined)
     expect(pmu.get.children(['#document', ['tag']])).to.deep.equal([['tag']])
     expect(pmu.get.children(['#document-fragment', ['tag'], 'string', ['#cdata-section', 'foo'], ['tag2']])).to.deep.equal([['tag'], ['tag2']])

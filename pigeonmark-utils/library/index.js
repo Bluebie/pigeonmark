@@ -1,3 +1,21 @@
+/**
+ * @typedef {Object} PMAttributes - xml tag attributes
+ * @typedef {[tag: string, ...children: PMChildNode[]]} PMTagWithoutAttributes - xml tag, without attributes
+ * @typedef {[tag: string, attrs: PMAttributes, ...children: PMChildNode[]]} PMTagWithAttributes - xml tag, with attributes
+ * @typedef {PMTagWithAttributes|PMTagWithoutAttributes} PMTag - xml tag, with or without attributes
+ * @typedef {string} PMText - xml text node
+ * @typedef {['#cdata-section', ...text: string[]]} PMCData - xml CDATA block
+ * @typedef {['#comment', ...text: string[]]} PMComment - xml comment
+ * @typedef {PMTag|PMCData|PMComment|PMText} PMChildNode - any type which can be a child of a tag, document, or fragment
+ * @typedef {[name: string, attrs: PMAttributes]} PMXMLPI - xml processing instruction
+ * @typedef {['#document', { doctype: string|undefined }, ...children: PMChildNode[]]} PMHTMLDocument - html root document container
+ * @typedef {['#document', { doctype: string|undefined, pi: PMXMLPI[]|undefined }, ...children: PMChildNode[]]} PMXMLDocument - html root document container
+ * @typedef {PMXMLDocument|PMHTMLDocument} PMDocument - either a html or xml document root
+ * @typedef {['#document-fragment', ...children: PMChildNode[]]} PMFragment - XML document fragment container, used to group several root level tags and texts together
+ * @typedef {PMTag|PMText|PMFragment|PMDocument} PMRootNode
+ * @typedef {PMTag|PMAttributes|PMText|PMCData|PMComment|PMXMLPI|PMHTMLDocument|PMFragment} PMNode
+ */
+
 const typeLabels = {
   '#document': 'document',
   '#cdata-section': 'cdata',
@@ -20,24 +38,6 @@ function isAttrs (obj) {
 
   return true
 }
-
-/**
- * @typedef {object} PMAttributes - xml tag attributes
- * @typedef {[tag: string, ...children]} PMTagWithoutAttributes - xml tag, without attributes
- * @typedef {[tag: string, attrs: Attributes, ...children: Node[]]} PMTagWithAttributes - xml tag, with attributes
- * @typedef {PMTagWithAttributes|PMTagWithoutAttributes} PMTag - xml tag, with or without attributes
- * @typedef {string} PMText - xml text node
- * @typedef {['#cdata-section', ...text: string[]]} PMCData - xml CDATA block
- * @typedef {['#comment', ...text: string[]]} PMComment - xml comment
- * @typedef {PMTag|PMCData|PMComment|PMText} PMChildNode - any type which can be a child of a tag, document, or fragment
- *
- * @typedef {['!DOCTYPE', ...text: string[]]} PMDoctype - XML/HTML doctype
- * @typedef {['?xml', attributes: PMAttributes]} PMXMLPI - xml pi tag
- * @typedef {['?xml-stylesheet', attributes: PMAttributes]} PMXMLStylesheet - xml stylesheet pi tag
- * @typedef {['#document-fragment', ...children: PMChildNode[]]} - XML document fragment container, used to group several root level tags and texts together
- * @typedef {['#document', ...children: PMChildNode[]]} - XML root document container
- * @typedef {PMTag|PMFragment|PMDocument} PMRootNode
- */
 
 exports.get = {
   /**

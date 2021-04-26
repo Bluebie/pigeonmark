@@ -67,3 +67,5 @@ which serializes to XML:
 ```xml
 <object xmlns="pigeonmark:arbitrary"><string name="name">Henry</string><number name="age">45</number></object>
 ```
+
+<p align=center><img alt="GitHub Actions Continuous Integration Status" src=https://github.com/Bluebie/pigeonmark/actions/workflows/node.js.yml/badge.svg></p>

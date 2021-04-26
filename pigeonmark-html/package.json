@@ -1,6 +1,6 @@
 {
   "name": "pigeonmark-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Codec to transform HTML5 to PigeonMark (JsonML superset) and vice versa",
   "main": "library/index.js",
   "scripts": {
@@ -30,6 +30,6 @@
   "dependencies": {
     "html-tags": "^3.1.0",
     "htmlparser2": "^6.1.0",
-    "pigeonmark-utils": "^1.0.1"
+    "pigeonmark-utils": "^1.0.2"
   }
 }

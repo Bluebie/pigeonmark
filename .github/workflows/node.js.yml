@@ -37,6 +37,12 @@ jobs:
       run: npm run build --if-present
     - working-directory: ./pigeonmark-html
       run: npm test
+    - working-directory: ./pigeonmark-xml
+      run: npm ci
+    - working-directory: ./pigeonmark-xml
+      run: npm run build --if-present
+    - working-directory: ./pigeonmark-xml
+      run: npm test
     - working-directory: ./pigeonmark-arbitrary
       run: npm ci
     - working-directory: ./pigeonmark-arbitrary

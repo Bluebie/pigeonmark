@@ -47,8 +47,17 @@ describe('pigeonmark-html.encode()', () => {
       expect(encode(string)).to.equal(string)
       expect(encode(['tag', string])).to.equal(`<tag>${string}</tag>`)
       expect(encode(['img', { title: ' ' + string }])).to.equal(`<img title=" ${string}">`)
+      expect(encode(['img', { title: string }])).to.equal(`<img title=${string}>`)
       expect(encode(['#comment', string])).to.equal(`<!--${string}-->`)
       expect(encode(['#document', { doctype: string }])).to.equal(`<!DOCTYPE ${string}>\n`)
     }
+  })
+
+  it('uses efficient attribute encoding', () => {
+    expect(encode(['img', { title: 'hello' }])).to.equal('<img title=hello>')
+    expect(encode(['img', { title: '' }])).to.equal('<img title>')
+    expect(encode(['img', { title: "foo'''bar" }])).to.equal('<img title="foo\'\'\'bar">')
+    expect(encode(['img', { title: 'foo"""bar' }])).to.equal('<img title=\'foo"""bar\'>')
+    expect(encode(['img', { title: 'foo""\'\'bar' }])).to.equal('<img title="foo&#34;&#34;\'\'bar">')
   })
 })

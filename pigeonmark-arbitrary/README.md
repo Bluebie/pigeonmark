@@ -43,6 +43,11 @@ which serializes to XML:
 <object xmlns="pigeonmark:arbitrary"><string name="name">Henry</string><number name="age">45</number></object>
 ```
 
+## Updates:
+
+1.0.0 - Initial release
+1.0.1 - Add `.isArbitraryEncoded()` function
+
 ## API
 
 ```js
@@ -55,7 +60,7 @@ arbitrary.decode(['string', { xmlns: 'pigeonmark:arbitrary' }, 'Hello World'])
 //=> 'Hello World'
 ```
 
-### arbitrary.isArbitrary(node)
+### arbitrary.isArbitraryEncoded(node)
 
 Test if a given JsonML structure is in pigeonmark-arbitrary format
 

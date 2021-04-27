@@ -1,6 +1,6 @@
 {
   "name": "pigeonmark-arbitrary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Transform arbitrary object structures (json superset) in to JsonML/PigeonMark and back again, allowing arbitrary data to be passed through XML tools",
   "main": "library/index.js",
   "scripts": {
@@ -28,6 +28,6 @@
     "mocha": "^8.3.2"
   },
   "dependencies": {
-    "pigeonmark-utils": "^1.0.2"
+    "pigeonmark-utils": "^1.0.3"
   }
 }

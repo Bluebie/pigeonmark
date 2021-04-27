@@ -1,6 +1,6 @@
 const utils = require('pigeonmark-utils')
 
-let symbolTable = {}
+const symbolTable = new Map()
 
 const decoder = {
   true () { return true },
@@ -54,10 +54,10 @@ const decoder = {
 
   symbol (element) {
     const id = utils.get.attribute(element, 'id')
-    if (!symbolTable[id]) {
-      symbolTable[id] = Symbol(utils.get.text(element))
+    if (!symbolTable.has(id)) {
+      symbolTable.set(id, Symbol(utils.get.text(element)))
     }
-    return symbolTable[id]
+    return symbolTable.get(id)
   }
 }
 
@@ -66,15 +66,20 @@ function decode (element) {
   return decoder[tag](element)
 }
 
-module.exports = (jsonml) => {
+/**
+ * Reads JsonML/PigeonMark structure and decodes to arbitrary data
+ * @param {utils.PMTag} rootTag
+ * @returns {boolean|null|undefined|string|Array|Set|Map|Symbol|object|Buffer|Date|bigint|number}
+ */
+module.exports = (rootTag) => {
   try {
-    const type = utils.get.type(jsonml)
+    const type = utils.get.type(rootTag)
     if (['document', 'fragment'].includes(type)) {
-      return decode(utils.get.children(jsonml)[0])
+      return decode(utils.get.children(rootTag)[0])
     } else if (type === 'tag') {
-      return decode(jsonml)
+      return decode(rootTag)
     }
   } finally {
-    symbolTable = {}
+    symbolTable.clear()
   }
 }

@@ -32,7 +32,7 @@ describe('arbitrary.encode()', () => {
 
   it('encodes objects', () => {
     expect(encode({ })).to.deep.equal(['object', { xmlns }])
-    expect(encode({ handshape: 5 })).to.deep.ordered.equal(['object', { xmlns }, ['number', { name: 'handshape' }, 5]])
+    expect(encode({ handshape: 5 })).to.deep.ordered.equal(['object', { xmlns }, ['number', { name: 'handshape' }, '5']])
     expect(encode({ a: true, b: false })).to.deep.ordered.equal(['object', { xmlns }, ['true', { name: 'a' }], ['false', { name: 'b' }]])
   })
 
@@ -53,6 +53,9 @@ describe('arbitrary.encode()', () => {
   })
 
   it('encodes symbols', () => {
-    expect(encode(Symbol('foo'))).to.deep.ordered.equal(['symbol', { xmlns, id: 0 }, 'foo'])
+    expect(encode(Symbol('foo'))).to.deep.ordered.equal(['symbol', { xmlns, id: '0' }, 'foo'])
+    expect(encode(Symbol('bar'))).to.deep.ordered.equal(['symbol', { xmlns, id: '0' }, 'bar'])
+    expect(encode([Symbol('foo'), Symbol('foo')])).to.deep.ordered.equal(['array', { xmlns }, ['symbol', { id: '0' }, 'foo'], ['symbol', { id: '1' }, 'foo']])
+    expect(encode([1, 2].fill(Symbol('foo')))).to.deep.ordered.equal(['array', { xmlns }, ['symbol', { id: '0' }, 'foo'], ['symbol', { id: '0' }, 'foo']])
   })
 })

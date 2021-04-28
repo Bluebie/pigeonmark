@@ -8,6 +8,7 @@
 - 1.0.1 - Bugfix for `utils.get.name()`
 - 1.0.2 - Added `utils.set` functions
 - 1.0.3 - Added `utils.isPigeonMark()`
+- 1.0.4 - Fixes to `pigeonmark-utils/library/tree-selector-adapter`
 
 ## API
 

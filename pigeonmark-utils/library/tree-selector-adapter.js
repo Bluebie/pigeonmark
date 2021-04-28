@@ -16,7 +16,7 @@ exports.isTag = (node) => util.get.type(node) === 'tag'
  * @param {util.PMTag} node
  * @returns {string|undefined}
  */
-exports.tag = (node) => util.get.name(node)
+exports.tag = (node) => util.get.name(node) || ''
 
 /**
  * Get the string id value of a tag, or an empty string if it
@@ -42,6 +42,13 @@ exports.className = (node) => exports.attr(node, 'class') || ''
  * @returns {string|undefined}
  */
 exports.attr = (node, attributeName) => util.get.attribute(node, attributeName)
+
+/**
+ * Get the child tags of an input tag
+ * @param {util.PMRootNode} tag
+ * @returns {util.PMTag[]}
+ */
+exports.children = (tag) => util.get.children(tag)
 
 /**
  * Get the text contents of a node, like WebAPI DOM's textContent property

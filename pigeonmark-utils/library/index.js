@@ -1,4 +1,8 @@
 /**
+ * @module pigeonmark-utils
+ */
+
+/**
  * @typedef {Object} PMAttributes - xml tag attributes
  * @typedef {[tag: string, ...children: PMChildNode[]]} PMTagWithoutAttributes - xml tag, without attributes
  * @typedef {[tag: string, attrs: PMAttributes, ...children: PMChildNode[]]} PMTagWithAttributes - xml tag, with attributes

@@ -14,6 +14,7 @@ Provided in this repo, some commonjs packages:
  - pigeonmark-html offers encode and decode functions to transform HTML5 strings in to PigeonMark and vice versa
  - pigeonmark-utils provides getters and setters to navigate and manipulate PigeonMark DOMs, and an adaptor for
    using `tree-selector` with PigeonMark/JsonML documents
+ - pigeonmark-select wraps `css-select`'s powerful css selector engine, allowing css style querying of JsonML and PigeonMark documents
  - pigeonmark-arbitrary provides encode and decode functions for transforming arbitrary javascript structures in to JsonML structures and vice versa, which can then be xml encoded with pigeonmark-xml or another jsonml codec.
 
 Any assistance with making these packages also work with the modern ES6 modules system would be appreciated.

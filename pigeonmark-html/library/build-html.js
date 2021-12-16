@@ -45,12 +45,12 @@ const build = module.exports = {
 
   * attributes (element) {
     for (const name in element) {
-      const value = `${element[name]}`
+      const value = element[name]
       assert(!`${name}`.match(/[ "'>/=\0\cA-\cZ\u007F-\u009F]/), 'invalid attribute name')
 
-      if (value === true || value === '') {
+      if (value === true) {
         yield ` ${name}`
-      } else if (!value) {
+      } else if (value === false) {
         continue
       } else if (typeof value === 'string') {
         if (value.match(/[ "'`=<>]/)) {

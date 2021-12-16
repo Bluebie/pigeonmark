@@ -48,12 +48,12 @@ const build = module.exports = {
       const value = element[name]
       assert(!`${name}`.match(/[ "'>/=\0\cA-\cZ\u007F-\u009F]/), 'invalid attribute name')
 
-      if (value === true) {
+      if (value === true || value === '') {
         yield ` ${name}`
       } else if (value === false) {
         continue
       } else if (typeof value === 'string') {
-        if (value === '' || value.match(/[ "'`=<>]/)) {
+        if (value.match(/[ "'`=<>]/)) {
           const counts = frequency(value, '\'"')
           if (counts['"'] > counts["'"]) {
             yield ` ${name}='${esc(value, "&'")}'`

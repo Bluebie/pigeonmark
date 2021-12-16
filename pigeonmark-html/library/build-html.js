@@ -53,7 +53,7 @@ const build = module.exports = {
       } else if (value === false) {
         continue
       } else if (typeof value === 'string') {
-        if (value.match(/[ "'`=<>]/)) {
+        if (value === '' || value.match(/[ "'`=<>]/)) {
           const counts = frequency(value, '\'"')
           if (counts['"'] > counts["'"]) {
             yield ` ${name}='${esc(value, "&'")}'`

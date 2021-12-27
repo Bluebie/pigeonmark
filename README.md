@@ -2,7 +2,7 @@
 
 This repo contains codecs and specs for PigeonMark, a superset of JsonML encoding, capable of fully representing anything html5 or xml 1.0 encoding can represent, as structured compact data.
 
-Additionally, PigeonMark specifies pigeonmark:arbitrary, an opinionated minimalist standard for encoding JSON-like data structures in to XML. It's also a superset of XML, with support for undefined, and binary values.
+Additionally, PigeonMark specifies pigeonmark:arbitrary, an opinionated minimalist standard for encoding JSON-like data structures in to XML. It's also a superset of JSON, with support for undefined, and binary values.
 
 Implementations are available here for NodeJS-like platforms.
 

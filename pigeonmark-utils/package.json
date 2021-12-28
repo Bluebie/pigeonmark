@@ -1,6 +1,6 @@
 {
   "name": "pigeonmark-utils",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Utilities for working with PigeonMark data structures",
   "main": "library/index.js",
   "scripts": {
@@ -23,6 +23,6 @@
   "homepage": "https://github.com/Bluebie/pigeonmark#readme",
   "devDependencies": {
     "chai": "^4.3.4",
-    "mocha": "^8.3.2"
+    "mocha": "^9.1.3"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "pigeonmark-arbitrary",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Transform arbitrary object structures (json superset) in to JsonML/PigeonMark and back again, allowing arbitrary data to be passed through XML tools",
   "main": "library/index.js",
   "scripts": {
@@ -25,9 +25,9 @@
   "homepage": "https://github.com/Bluebie/pigeonmark#readme",
   "devDependencies": {
     "chai": "^4.3.4",
-    "mocha": "^8.3.2"
+    "mocha": "^9.1.3"
   },
   "dependencies": {
-    "pigeonmark-utils": "^1.0.3"
+    "pigeonmark-utils": "^1.0.5"
   }
 }

@@ -58,6 +58,10 @@ const decoder = {
       symbolTable.set(id, Symbol(utils.get.text(element)))
     }
     return symbolTable.get(id)
+  },
+
+  url (element) {
+    return new URL(utils.get.text(element))
   }
 }
 

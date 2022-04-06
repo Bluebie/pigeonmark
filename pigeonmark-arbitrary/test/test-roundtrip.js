@@ -11,7 +11,8 @@ const typeTests = {
   map: [[[1, 'a'], [2, 'b']], [['a', '1'], ['b', '2']]].map(x => new Map(x)),
   singleton: [true, false, null, undefined],
   date: [new Date(), new Date(0)],
-  buffer: [Buffer.from('hello world'), Buffer.from('whatever is the matter'), Buffer.alloc(300), crypto.randomBytes(1024)]
+  buffer: [Buffer.from('hello world'), Buffer.from('whatever is the matter'), Buffer.alloc(300), crypto.randomBytes(1024)],
+  url: [new URL('https://foo.com/bar'), new URL('ftp://user:pass@domain.tld/path/to/file')]
 }
 
 describe('roundtrip', () => {

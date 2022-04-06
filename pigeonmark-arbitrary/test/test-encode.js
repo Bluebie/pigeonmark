@@ -58,4 +58,9 @@ describe('arbitrary.encode()', () => {
     expect(encode([Symbol('foo'), Symbol('foo')])).to.deep.ordered.equal(['array', { xmlns }, ['symbol', { id: '0' }, 'foo'], ['symbol', { id: '1' }, 'foo']])
     expect(encode([1, 2].fill(Symbol('foo')))).to.deep.ordered.equal(['array', { xmlns }, ['symbol', { id: '0' }, 'foo'], ['symbol', { id: '0' }, 'foo']])
   })
+
+  it('encodes urls', () => {
+    const testURL = 'https://example.org/foo/bar'
+    expect(encode(new URL(testURL))).to.deep.ordered.equal(['url', { xmlns }, testURL])
+  })
 })

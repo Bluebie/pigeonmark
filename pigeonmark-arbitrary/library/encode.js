@@ -24,6 +24,8 @@ function encode (obj) {
     })]
   } else if (obj instanceof Set) {
     return ['set', ...[...obj].map(v => encode(v))]
+  } else if (obj instanceof URL) {
+    return ['url', obj.href]
   } else if (Buffer.isBuffer(obj)) {
     return ['buffer', { encoding: 'base64' }, obj.toString('base64')]
   } else if (typeof obj === 'object') {

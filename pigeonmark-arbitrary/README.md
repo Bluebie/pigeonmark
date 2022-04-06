@@ -18,6 +18,7 @@ This encoding allows arbitrary non-recursive data structures to processed throug
  - `123n` becomes `<bigint>123</bigint>`
  - `new Date()` becomes `<date>2021-04-26T03:21:14.350Z</date>`
  - `Symbol('foo')` becomes `<symbol id="0">foo</symbol>`
+ - `new URL('http://example.com/path')` becomes `<url>http://example.com/path</url>`
 
 The root node of a pigeonmark:arbitrary document must always have the `xmlns` attribute set to `"pigeonmark:arbitrary"`. For example:
 
@@ -47,6 +48,8 @@ which serializes to XML:
 
 1.0.0 - Initial release
 1.0.1 - Add `.isArbitraryEncoded()` function
+1.0.2 - Upgrade dependancies to satisfy dependabot/npm audit
+1.0.3 - add <url/> data type
 
 ## API
 

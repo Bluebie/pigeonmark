@@ -66,4 +66,10 @@ describe('arbitrary.decode()', () => {
     expect(c).to.not.equal(d)
     expect(a).to.not.equal(c)
   })
+
+  it('decodes urls', () => {
+    const result = decode(['url', { xmlns }, 'https://example.com/a/b/c'])
+    expect(result).to.be.a('url')
+    expect(result.toString()).to.equal('https://example.com/a/b/c')
+  })
 })

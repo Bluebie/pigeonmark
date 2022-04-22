@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
-const { expect } = require('chai')
-const { isPigeonMark } = require('../library/index')
+import { expect } from 'chai'
+import { isPigeonMark } from '../lib/index.js'
 
 describe('isPigeonMark()', () => {
   it('works for tags', () => {

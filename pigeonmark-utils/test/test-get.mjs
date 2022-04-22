@@ -1,6 +1,6 @@
 /* eslint-env mocha */
-const { expect } = require('chai')
-const pmu = require('../library/index.js')
+import { expect } from 'chai'
+import pmu from '../lib/index.js'
 
 describe('pigeonmark-utils.get', () => {
   it('pigeonmark-utils.get.type(node)', () => {
@@ -34,8 +34,8 @@ describe('pigeonmark-utils.get', () => {
     expect(pmu.get.name(['tag', { diff: 'val' }, 'string', ['subtag']])).to.equal('tag')
     expect(pmu.get.name(['tag', 'string'])).to.equal('tag')
     expect(pmu.get.name(['tag', 'string', ['subtag']])).to.equal('tag')
-    expect(pmu.get.name(['#cdata-section', 'foo'])).to.equal(undefined)
-    expect(pmu.get.name(['#document', ['tag']])).to.deep.equal(undefined)
+    expect(() => pmu.get.name(['#cdata-section', 'foo'])).to.throw
+    expect(() => pmu.get.name(['#document', ['tag']])).to.throw
   })
 
   it('pigeonmark-utils.get.attribute(node, name)', () => {
@@ -59,8 +59,8 @@ describe('pigeonmark-utils.get', () => {
     expect(pmu.get.children(['tag', {}, 'string'])).to.deep.equal([])
     expect(pmu.get.children(['tag', ['subtag', { attr: 'val' }], ' ooo ', ['yeah', 'no']])).to.deep.equal([['subtag', { attr: 'val' }], ['yeah', 'no']])
     expect(pmu.get.children(['tag', {}, ['subtag', { attr: 'val' }], ' ooo ', ['yeah', 'no']])).to.deep.equal([['subtag', { attr: 'val' }], ['yeah', 'no']])
-    expect(pmu.get.children(['#cdata-section', 'foo'])).to.deep.equal(undefined)
-    expect(pmu.get.children(['#document', ['tag']])).to.deep.equal([['tag']])
+    expect(pmu.get.children(['#cdata-section', 'foo'])).to.deep.equal([])
+    expect(pmu.get.children(['#document', {}, ['tag']])).to.deep.equal([['tag']])
     expect(pmu.get.children(['#document-fragment', ['tag'], 'string', ['#cdata-section', 'foo'], ['tag2']])).to.deep.equal([['tag'], ['tag2']])
   })
 
@@ -69,8 +69,8 @@ describe('pigeonmark-utils.get', () => {
     expect(pmu.get.childNodes(['tag', { attr: 'val' }, 'string', ['tag']])).to.deep.equal(['string', ['tag']])
     expect(pmu.get.childNodes(['tag', 'string'])).to.deep.equal(['string'])
     expect(pmu.get.childNodes(['tag', 'string', ['tag']])).to.deep.equal(['string', ['tag']])
-    expect(pmu.get.childNodes(['#cdata-section', 'foo'])).to.deep.equal(undefined)
-    expect(pmu.get.childNodes(['#document', ['tag']])).to.deep.equal([['tag']])
+    expect(pmu.get.childNodes(['#cdata-section', 'foo'])).to.deep.equal([])
+    expect(pmu.get.childNodes(['#document', {}, ['tag']])).to.deep.equal([['tag']])
     expect(pmu.get.childNodes(['#document-fragment', ['tag'], 'string', ['#cdata-section', 'foo'], ['tag2']])).to.deep.equal([['tag'], 'string', ['#cdata-section', 'foo'], ['tag2']])
   })
 
@@ -82,7 +82,7 @@ describe('pigeonmark-utils.get', () => {
     expect(pmu.get.id(['tag', 'string'])).to.equal(undefined)
     expect(pmu.get.id(['tag', 'string', ['tag']])).to.equal(undefined)
     expect(pmu.get.id(['#cdata-section', 'foo'])).to.equal(undefined)
-    expect(pmu.get.id(['#document', ['tag']])).to.deep.equal(undefined)
+    expect(pmu.get.id(['#document', {}, ['tag']])).to.deep.equal(undefined)
   })
 
   it('pigeonmark-utils.get.classList(node)', () => {
@@ -93,7 +93,7 @@ describe('pigeonmark-utils.get', () => {
     expect(pmu.get.classList(['tag', 'string'])).to.deep.equal([])
     expect(pmu.get.classList(['tag', 'string', ['tag']])).to.deep.equal([])
     expect(pmu.get.classList(['#cdata-section', 'foo'])).to.deep.equal([])
-    expect(pmu.get.classList(['#document', ['tag']])).to.deep.equal([])
+    expect(pmu.get.classList(['#document', {}, ['tag']])).to.deep.equal([])
   })
 
   it('pigeonmark-utils.get.text(node)', () => {
@@ -107,6 +107,6 @@ describe('pigeonmark-utils.get', () => {
     expect(pmu.get.text(['tag', 'string', ['#comment', 'string'], '2'])).to.equal('string2')
     expect(pmu.get.text(['tag', 'string', ['#cdata-section', '3'], '2'])).to.equal('string32')
     expect(pmu.get.text(['#document-fragment', ['tag', 'string', ['#cdata-section', '3'], '2']])).to.equal('string32')
-    expect(pmu.get.text(['#document', ['tag', 'string', ['#cdata-section', '3'], '2']])).to.equal('string32')
+    expect(pmu.get.text(['#document', {}, ['tag', 'string', ['#cdata-section', '3'], '2']])).to.equal('string32')
   })
 })

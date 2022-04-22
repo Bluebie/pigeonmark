@@ -3,7 +3,7 @@ export type {
   PMXMLPI, PMHTMLDocument, PMXMLDocument, PMDocument, PMFragment, PMRootNode, PMNode
 } from './types'
 
-import isPigeonMark from './isPigeonMark.js'
+import isPigeonMark from './is-pigeon-mark.js'
 import get from './get/index.js'
 import set from './set/index.js'
 import create from './create/index.js'

@@ -1,6 +1,6 @@
 {
   "name": "pigeonmark-utils",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Utilities for working with PigeonMark data structures",
   "type": "module",
   "main": "lib/index.js",

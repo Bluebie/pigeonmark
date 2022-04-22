@@ -10,7 +10,8 @@
 - 1.0.3 - Added `utils.isPigeonMark()`
 - 1.0.4 - Fixes to `pigeonmark-utils/library/tree-selector-adapter`
 - 1.0.5 - Updates to dev dependancies mocha and chai to silence npm audit fails
-- 2.0.0 - Rewrite in typescript, switch to esm modules, all set functions return a new node mutated in the requested way instead of modifying the input node, create functions now exist
+- 2.0.1 - Rewrite in typescript, switch to esm modules, all set functions return a new node mutated in the requested way instead of modifying the input node, create functions now exist
+- 2.0.2 - make all the isType functions available through `utils.get.isWhatever`
 
 ## API
 

@@ -1,11 +1,11 @@
 /* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
-const { expect } = require('chai')
-const pmhtml = require('pigeonmark-html')
-const select = require('../index')
-const fs = require('fs')
+import { expect } from 'chai'
+import pmhtml from 'pigeonmark-html'
+import select from '../lib/index.js'
+import fs from 'fs'
 
-const doc = pmhtml.decode(fs.readFileSync(require.resolve('../test-data/find-sign.html')))
+const doc = pmhtml.decode(fs.readFileSync('test-data/find-sign.html'))
 
 describe('test with find-sign homepage html', () => {
   const img = ['img', { id: 'header', alt: 'Home Button', src: '/style/assets/find-sign-logo.svg?b75877a8' }]

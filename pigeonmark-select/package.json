@@ -1,10 +1,22 @@
 {
   "name": "pigeonmark-select",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Run CSS Selectors against PigeonMark/JsonML DOM structures",
-  "main": "index.js",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "exports": {
+    ".": "./lib/index.js",
+    "./adapter": "./lib/adapter.js"
+  },
   "scripts": {
-    "test": "mocha --exit"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test",
+    "test": "rm -rf lib/*; tsc; mocha test/test-*.mjs",
+    "clean": "rm -rf lib/*",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -25,12 +37,12 @@
   "homepage": "https://github.com/Bluebie/pigeonmark#readme",
   "dependencies": {
     "css-select": "^4.3.0",
-    "pigeonmark-utils": "^1.0.5"
+    "pigeonmark-utils": "^2.0.2"
   },
   "devDependencies": {
     "chai": "^4.3.6",
     "mocha": "^9.2.2",
     "pigeonmark-html": "^1.0.2",
-    "standard": "^16.0.4"
+    "typescript": "^4.6.3"
   }
 }

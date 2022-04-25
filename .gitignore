@@ -106,3 +106,4 @@ dist
 **/.DS_Store
 
 pigeonmark-utils/lib
+pigeonmark-select/lib

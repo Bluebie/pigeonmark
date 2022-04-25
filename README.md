@@ -12,9 +12,8 @@ Provided in this repo, some commonjs packages:
 
  - pigeonmark-xml offers encode and decode functions to transform XML strings in to PigeonMark and vice versa
  - pigeonmark-html offers encode and decode functions to transform HTML5 strings in to PigeonMark and vice versa
- - pigeonmark-utils provides getters and setters to navigate and manipulate PigeonMark DOMs, and an adaptor for
-   using `tree-selector` with PigeonMark/JsonML documents
- - pigeonmark-select wraps `css-select`'s powerful css selector engine, allowing css style querying of JsonML and PigeonMark documents
+ - pigeonmark-utils provides builders, getters and setters to navigate and manipulate PigeonMark DOMs
+ - pigeonmark-select wraps `css-select`'s powerful css selector engine, allowing css querying of JsonML and PigeonMark documents
  - pigeonmark-arbitrary provides encode and decode functions for transforming arbitrary javascript structures in to JsonML structures and vice versa, which can then be xml encoded with pigeonmark-xml or another jsonml codec.
 
 Any assistance with making these packages also work with the modern ES6 modules system would be appreciated.
@@ -32,12 +31,12 @@ PigeonMark implements JsonML encoding at it's core:
 PigeonMark adds extra encoding to represent other aspects of XML and HTML documents:
 
  - `<!--text-->` becomes `['#comment', 'text']`
- - `<!DOCTYPE html>` becomes `['!DOCTYPE', 'html']`
- - `<?xml version="1.0">` becomes `['?xml', { version: '1.0' }]`
+ - `<!DOCTYPE html>\n<html></html>` becomes `['#document', { doctype: 'html' }, ['html']]`
+ - `<?xml version="1.0">\n<root/>` becomes `['#document', { pi: [['?xml', { version: '1.0' }]] }, ['root']]`
  - `<![CDATA[text]]>` becomes `['#cdata-section', 'text']`
  - `<br><br>` becomes `['#document-fragment', ['br'], ['br']]`
 
-Where possible these map to WebAPI DOM nodeName properties, to create something like a very lightweight virtual DOM for storage.
+Where possible these map to WebAPI DOM nodeName properties, to create something like a very lightweight virtual DOM that is easily passed around or stored in any medium that supports JSON strings, objects, and array types.
 
 ## pigeonmark:arbitrary encoding
 

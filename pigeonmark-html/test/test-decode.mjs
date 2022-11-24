@@ -1,6 +1,6 @@
 /* eslint-env mocha */
-const decode = require('../library/decode')
-const { expect } = require('chai')
+import decode from "../decode.js"
+import { expect } from "chai"
 
 const unicode = {
   Arabic: 'ٱلرَّحْمـَ',

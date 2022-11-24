@@ -1,22 +1,21 @@
-const hp2 = require('htmlparser2')
+import hp2 from "htmlparser2"
+import { PMNode } from "pigeonmark-utils"
 
 /**
  * decode HTML in to extended JsonML-like format (adding #processing-instruction, #cdata-section, #comment nodes)
- * @param {string} string
- * @returns {object|Array}
  */
-module.exports = function decode (string) {
+export default function decode (string: string): any {
   let doctype
   const root = ['#root']
-  let stack = [root]
+  let stack: any = [root]
   const top = () => stack[0]
-  const push = (data) => {
+  const push = (data: PMNode) => {
     top().push(data)
     stack.unshift(data)
   }
-  const pop = (name) => {
-    const found = stack.find(v => v[0] === name)
-    stack = stack.filter(v => v !== found)
+  const pop = (name: string) => {
+    const found = stack.find((v: any) => v[0] === name)
+    stack = stack.filter((v: any) => v !== found)
   }
 
   const parser = new hp2.Parser({

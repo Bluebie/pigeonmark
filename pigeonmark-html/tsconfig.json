@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "es6",
+    "declaration": true,
+    "outDir": "./",
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["*.ts"],
+  "exclude": ["node_modules", "**/__tests__/*"]
+}

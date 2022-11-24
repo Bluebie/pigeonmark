@@ -1,7 +1,6 @@
 /* eslint-env mocha */
-const encode = require('../library/encode')
-const decode = require('../library/decode')
-const { expect } = require('chai')
+import { encode, decode } from "../index.js"
+import { expect } from "chai"
 
 describe('pigeonmark-html roundtrip decode() through encode()', () => {
   const testPage = [

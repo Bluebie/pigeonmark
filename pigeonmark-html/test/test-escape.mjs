@@ -1,6 +1,6 @@
 /* eslint-env mocha */
-const esc = require('../library/escape')
-const { expect } = require('chai')
+import esc from "../escape.js"
+import { expect } from "chai"
 
 const unicode = {
   Arabic: 'ٱلرَّحْمـَ',

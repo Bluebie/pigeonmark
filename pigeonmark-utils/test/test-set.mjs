@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import { expect } from 'chai'
-import pmu from '../lib/index.js'
+import pmu from '../index.js'
 
 describe('pigeonmark-utils.set', () => {
   it('pigeonmark-utils.set.name(node)', () => {

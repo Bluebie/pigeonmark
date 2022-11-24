@@ -1,25 +1,14 @@
 {
   "name": "pigeonmark-utils",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Utilities for working with PigeonMark data structures",
   "type": "module",
-  "main": "lib/index.js",
-  "files": ["lib/**/*"],
-  "exports": {
-    ".": "./lib/index.js",
-    "./is-pigeon-mark": "./lib/is-pigeon-mark.js",
-    "./create": "./lib/create/index.js",
-    "./create/*": "./lib/create/*.js",
-    "./get": "./lib/get/index.js",
-    "./get/*": "./lib/get/*.js",
-    "./set": "./lib/set/index.js",
-    "./set/*": "./lib/set/*.js"
-  },
+  "main": "index.js",
   "scripts": {
     "prepare" : "npm run build",
     "prepublishOnly" : "npm test",
-    "test": "rm -rf lib/*; tsc; mocha test/test-*.mjs",
-    "clean": "rm -rf lib/*",
+    "test": "rm -rf *.js; rm -rf *.d.ts; rm -rf ./**/*.js; rm -rf ./**/*.d.ts; tsc; mocha test/test-*.mjs",
+    "clean": "rm -rf *.js; rm -rf *.d.ts; rm -rf ./**/*.js; rm -rf ./**/*.d.ts;",
     "build": "tsc"
   },
   "repository": {

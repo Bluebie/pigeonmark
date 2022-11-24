@@ -3,9 +3,9 @@
     "target": "es2015",
     "module": "es6",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "./",
     "strict": true
   },
-  "include": ["src"],
+  "include": ["*.ts", "get/*.ts", "set/*.ts", "create/*.ts"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }

@@ -1,11 +1,5 @@
 import type { PMTag, PMXMLPI, PMAttributes } from '../types'
 import { isProcessingInstruction, isTagWithAttributes, isTagWithoutAttributes } from '../get/type.js'
-import getChildNodes from '../get/child-nodes.js'
-import getAttributes from '../get/attributes.js'
-import getName from '../get/name.js'
-import createTag from '../create/tag.js'
-import createXMLPI from '../create/xmlpi.js'
-
 
 /**
  * sets all the attributes of a tag or xmlpi, or an empty object if it doesn't have any

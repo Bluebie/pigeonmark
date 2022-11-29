@@ -1,5 +1,5 @@
+import type { PMNode } from "pigeonmark-utils"
 import hp2 from "htmlparser2"
-import { PMNode } from "pigeonmark-utils"
 
 /**
  * decode HTML in to extended JsonML-like format (adding #processing-instruction, #cdata-section, #comment nodes)

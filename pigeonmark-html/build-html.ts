@@ -1,9 +1,9 @@
+import type { PMNode, PMTag, PMText, PMAttributes, PMCData, PMComment, PMDocument, PMFragment } from "pigeonmark-utils/types"
+import utils from "pigeonmark-utils"
 import assert from "nanoassert"
 import selfClosingTagsArr from "html-tags/void.js"
 import esc from "./escape.js"
-import utils, { PMNode, PMTag, PMText } from "pigeonmark-utils"
-import { PMAttributes, PMCData, PMComment, PMDocument, PMFragment } from "pigeonmark-utils/types"
-const selfClosingTags = new Set(selfClosingTagsArr)
+const selfClosingTags = new Set<string>([...selfClosingTagsArr])
 
 function frequency (string: string, chars: string) {
   const frequencies = Object.fromEntries([...chars].map(x => [x, 0]))

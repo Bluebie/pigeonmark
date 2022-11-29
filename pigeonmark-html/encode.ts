@@ -1,4 +1,4 @@
-import { PMNode } from "pigeonmark-utils"
+import type { PMNode } from "pigeonmark-utils"
 import { any as build } from "./build-html.js"
 
 /**
